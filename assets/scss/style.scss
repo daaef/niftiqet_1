@@ -1,0 +1,171 @@
+@import "partials/base/variables";
+@import "uikit/import";
+//@import "./buefy/import";
+@import "partials/base/reset";
+
+/*Components*/
+@import "partials/pages/home";
+@import "partials/pages/events";
+@import "partials/pages/tickets";
+@import "partials/components/nav-bar";
+@import "partials/components/buttons";
+/*Components*/
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+/*a:link {
+  color: hsl(var(--bc));
+}*/
+.menu :where(li) > :where(*:not(ul)) {
+  color: hsl(var(--bc));
+  &:hover {
+    color: hsla(var(--bc)/.8);
+  }
+}
+body {
+  & > * {
+    position: relative;
+    z-index: 2;
+    color: hsl(var(--bc));
+  }
+  .card {
+    color: hsl(var(--bc));
+  }
+  /*&:after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }*/
+  .home--body {
+
+  }
+}
+nav {
+  .menu-horizontal {
+    ul {
+      background: hsla(var(--b1)/0.9);
+      backdrop-filter: blur(2px);
+    }
+  }
+}
+
+.label {
+  color: hsl(var(--bc));
+}
+
+::placeholder {
+  color: hsla(var(--bc) / 0.7);
+}
+
+.select select, .taginput .taginput-container.is-focusable, .textarea, .input {
+  color: hsl(var(--bc));
+  &::placeholder {
+    color: hsla(var(--bc) / 0.7);
+  }
+}
+
+.radio {
+  width: unset;
+  height: unset;
+}
+.dropdown-menu {
+  .select {
+    display: inline-block;
+    flex-shrink: unset;
+    height: unset;
+    padding-left: unset;
+    padding-right: unset;
+    line-height: unset;
+    min-height: unset;
+    appearance: unset;
+    select {
+      background: hsl(var(--b1));
+      border: none;
+      color: hsl(var(--bc));
+    }
+    a[role="button"] {
+      border: none;
+      color: hsl(var(--bc));
+      span {
+        color: hsl(var(--bc));
+      }
+    }
+  }
+}
+.datepicker .dropdown-content{
+  background: hsl(var(--b1));
+}
+
+span {
+  color: hsl(var(--bc));
+}
+
+.field {
+  p {
+    flex-grow: unset;
+  }
+  .select {
+    display: inline-block;
+    width: 100%;
+    flex-shrink: unset;
+    height: unset;
+    padding-left: unset;
+    padding-right: unset;
+    line-height: unset;
+    min-height: unset;
+    appearance: unset;
+    select {
+      background: hsl(var(--b1));
+      border: none;
+      color: hsl(var(--bc));
+    }
+    a[role="button"] {
+      border: none;
+      color: hsl(var(--bc));
+      span {
+        color: hsl(var(--bc));
+      }
+    }
+  }
+}
+
+.ticket--set {
+  .event--card-grid {
+    margin-top: 20px !important;
+  }
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr !important;
+    .ticket--data, .activity--list {
+      order: 0;
+      position: relative;
+    }
+    .grid--collection {
+      order: 1;
+    }
+  }
+}
+
+.nav--spacer {
+  padding-top: 100px;
+}
+
+.profile--views {
+  .collapse {
+    border: solid 1px hsl(var(--bc) / 30%);
+    .collapse-title {
+      border-bottom: solid 1px hsl(var(--bc) / 30%);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
