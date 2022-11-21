@@ -269,7 +269,7 @@ export default {
   methods: {
     async login() {
       console.log('login in')
-      await store.wallet?.connect({ requestSignIn: true })
+      await this.wallet?.connect({ requestSignIn: true })
       // await this.wallet.activeWallet.requestSignIn({
       //   successUrl: `${this.address}/${
       //     this.userType === 'Buyer' ? 'events' : 'mint'
