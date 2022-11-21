@@ -13,7 +13,7 @@
     </header>
     <main>
       <section class="home--body flex justify-center">
-        <div class="cto--container max-w-screen-xl w-full px-4 min-h-screen">
+        <div class="cto--container max-w-screen-xl w-full px-4 py-10 min-h-screen">
           <div>
             <div
               class="bg-base-100/30 backdrop-blur min-h-screen my-5 rounded-2xl py-16 px-14"
@@ -298,6 +298,7 @@ export default {
   },
   async mounted() {
     await this.store.fetchMinterStores()
+    await this.store.fetchNftTokensBySplit(`aef.testnet`)
   },
   methods: {
     deleteDropFile(index) {
@@ -385,7 +386,10 @@ export default {
           +this.amount,
           this.mintStore,
           undefined,
-          undefined,
+          {
+            'aef.testnet': 5000,
+            'daaef.testnet': 5000
+          },
           this.event_category,
           {
             callbackUrl: `${window.location.origin}/events`,

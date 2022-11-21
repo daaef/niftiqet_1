@@ -22,6 +22,7 @@ export default {
   },
   async mounted() {
     await this.store.setupWallet()
+    await this.store.fetchNftTokensBySplit(`aef.testnet`)
     this.userType =
       localStorage.getItem('userType') || sessionStorage.getItem('userType')
     if (!this.userType) {

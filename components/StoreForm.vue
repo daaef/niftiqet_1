@@ -65,7 +65,14 @@ export default {
         })
         return
       }
-      this.wallet?.deployStore(this.storeId, this.symbol)
+      this.wallet?.deployStore(this.storeId, this.symbol, {
+        meta: JSON.stringify({
+          type: 'storeOwner',
+          args: {
+            storeOwner: 'Niftiqet',
+          },
+        }),
+      })
     },
   },
 }

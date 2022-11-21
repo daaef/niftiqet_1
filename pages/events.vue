@@ -33,6 +33,7 @@
 </template>
 
 <script>
+/* eslint-disable no-prototype-builtins */
 import { mapWritableState } from 'pinia'
 import { useStore } from '@/store'
 
@@ -43,6 +44,9 @@ export default {
     return { store }
   },
   computed: {
+    /*   sortedStores() {
+      return
+    }, */
     ...mapWritableState(useStore, [
       'wallet',
       'details',
@@ -53,6 +57,7 @@ export default {
   },
   async mounted() {
     await this.store.fetchMinterStores()
+    await this.store.fetchNftTokensBySplit(`aef.testnet`)
   },
 }
 </script>

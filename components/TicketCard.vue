@@ -26,12 +26,15 @@
         <NifBtn
           v-if="meta.listings.length && meta.owner !== details.accountId"
           class="btn w-full"
-          >Buy</NifBtn
-        >
+          @click="buyTicket($event, meta?.id, meta?.listings?.price)"
+          >Buy
+        </NifBtn>
         <button v-if="!meta.listings.length" class="btn w-full" @click="sell">
           Sell
         </button>
-        <button class="btn w-full btn-error text-white">Burn</button>
+        <button class="btn w-full btn-error text-white" @click="confirmBurn">
+          Burn
+        </button>
       </div>
     </div>
     <b-modal
@@ -87,6 +90,9 @@ export default {
     }
   },
   computed: {
+    metaStuff() {
+      return this.meta
+    },
     ...mapWritableState(useStore, [
       'wallet',
       'details',
@@ -98,6 +104,39 @@ export default {
   methods: {
     sell() {
       this.sellTicket = true
+    },
+    burnTicket(_, token) {
+      this.wallet
+        ?.burn([`${this.meta?.id}`])
+        .then(() => {
+          this.$buefy.toast.open('Ticket Burnt Successfully!')
+        })
+        .catch(() => {
+          this.$buefy.toast.open({
+            duration: 5000,
+            message: 'Failed to burn TIcket!',
+            type: 'is-danger',
+          })
+        })
+    },
+    confirmBurn() {
+      console.log('burning ticket')
+      this.$buefy.dialog.confirm({
+        title: 'Burning Ticket',
+        message:
+          'Are you sure you want to <b>Burn</b> this ticket? This action cannot be undone.',
+        confirmText: 'Burn Ticket',
+        type: 'is-danger',
+        hasIcon: true,
+        onConfirm: () => this.burnTicket(),
+      })
+    },
+    buyTicket(_, tokenId, price) {
+      console.log('buying ticket')
+      this.wallet?.makeOffer(
+        tokenId,
+        Number(price).toLocaleString('fullwide', { useGrouping: false })
+      )
     },
   },
 }

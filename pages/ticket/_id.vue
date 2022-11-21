@@ -82,6 +82,7 @@
 </template>
 
 <script>
+/* eslint-disable camelcase */
 import { mapWritableState } from 'pinia'
 import { useStore } from '@/store'
 
@@ -123,6 +124,8 @@ export default {
   },
   async mounted() {
     await this.store.fetchNftTokens(`${this.$route.params.id}`)
+
+    console.log('stuff is', this.activeTokens)
   },
 }
 </script>

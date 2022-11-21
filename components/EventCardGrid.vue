@@ -1,38 +1,59 @@
 <template>
-  <div class="event--card-grid" :class="gridSize === 3 ? 'three' : 'two'">
-    <event-card v-for="meta in metadata" :key="meta.id" :meta="meta" :self="linkSelf" />
+  <div v-if="events.length" class="">
+    <div
+      v-for="(event, i) in events"
+      :key="i"
+      class="event--card-grid"
+      :class="gridSize === 3 ? 'three' : 'two'"
+    >
+      <h3 class="capitalize font-medium text-xl">
+        {{ event[0].nft_contract_name }} Store
+      </h3>
+      <event-card
+        v-for="meta in event"
+        :key="meta.id"
+        :meta="meta"
+        :self="linkSelf"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import { mapWritableState } from "pinia";
-import { useStore } from "@/store";
+/* eslint-disable no-prototype-builtins */
+import { mapWritableState } from 'pinia'
+import { useStore } from '@/store'
 
 export default {
   props: {
     gridSize: {
       type: Number,
-      default(){
+      default() {
         return 3
-      }
+      },
     },
     linkSelf: {
       type: Boolean,
-      default(){
+      default() {
         return false
-      }
+      },
     },
     storeId: {
       type: String,
-      default(){
+      default() {
         return ''
-      }
-    }
+      },
+    },
   },
   setup() {
     const store = useStore()
 
     return { store }
+  },
+  data() {
+    return {
+      events: [],
+    }
   },
   computed: {
     ...mapWritableState(useStore, [
@@ -42,16 +63,22 @@ export default {
       'loading',
       'stores',
       'metadata',
+      'myStores',
     ]),
   },
   async mounted() {
     // await console.log('props',this.storeId)
     await this.store.fetchMetaData()
-  }
+    if (this.myStores) {
+      for (const key in this.myStores) {
+        if (this.myStores.hasOwnProperty(key)) {
+          // console.log(`${key}: ${this.myStores[key]}`)
+          this.events.push(this.myStores[key])
+        }
+      }
+    }
+  },
 }
-
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

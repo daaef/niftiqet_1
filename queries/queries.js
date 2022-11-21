@@ -69,6 +69,63 @@ export const nftTokens = gql`
     }
   }
 `
+export const nftTokensBySplits = gql`
+  query FetchNFTTokens($metadataId: String!) {
+    mb_views_nft_tokens(where: { splits: { _has_key: $metadataId } }) {
+      extra
+      base_uri
+      description
+      media
+      media_hash
+      metadata_content_flag
+      mint_memo
+      minted_receipt_id
+      minted_timestamp
+      minter
+      owner
+      reference
+      reference_blob
+      reference_hash
+      royalties_percent
+      token_id
+      nft_contract_reference
+      nft_contract_owner_id
+      nft_contract_name
+      nft_contract_is_mintbase
+      nft_contract_id
+      nft_contract_icon
+      nft_contract_created_at
+      nft_contract_content_flag
+      title
+      splits
+      royalties
+      copies
+      listings {
+        accepted_at
+        currency
+        kind
+        price
+        token_id
+        market_id
+        listed_by
+        created_at
+        approval_id
+        accepted_offer_id
+        offers {
+          offer_price
+          offered_at
+          offered_by
+          outbid_at
+          receipt_id
+          referral_amount
+          referrer_id
+          token_id
+          withdrawn_at
+        }
+      }
+    }
+  }
+`
 
 export const nftMetadata = gql`
   query FetchNFTMetadata($ownerId: String!) {

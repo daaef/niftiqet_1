@@ -4,7 +4,18 @@ import {
   fetchStore,
   nftMetadata,
   nftTokens,
+  nftTokensBySplits,
 } from '@/queries/queries'
+
+function ObjGroupBy(list, key) {
+  return list.reduce(
+    (groups, item) => ({
+      ...groups,
+      [item[key]]: [...(groups[item[key]] || []), item],
+    }),
+    {}
+  )
+}
 
 export const useStore = defineStore('main', {
   state: () => ({
@@ -22,6 +33,7 @@ export const useStore = defineStore('main', {
     metadata: [],
     niftyStore: {},
     myStore: {},
+    myStores: {},
     activeThing: {},
     userType: '',
     activeTokens: {},
@@ -113,6 +125,15 @@ export const useStore = defineStore('main', {
       }
       const data = await this.$nuxt.$graphql.default.request(query, variables)
       this.activeTokens = data.mb_views_nft_tokens
+    },
+    async fetchNftTokensBySplit(metadataId) {
+      const query = nftTokensBySplits
+      const variables = {
+        metadataId,
+      }
+      const data = await this.$nuxt.$graphql.default.request(query, variables)
+
+      this.myStores = ObjGroupBy(data.mb_views_nft_tokens, 'nft_contract_name')
     },
   },
 })
