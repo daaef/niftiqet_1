@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="sticky my-navigation top-0 w-full backdrop-blur-md bg-base-100/10 transition-colors"
+    class="sticky top-0 w-full transition-colors my-navigation backdrop-blur-md bg-base-100/10"
   >
     <div class="container px-4 navbar">
       <div class="navbar-start">
@@ -73,18 +73,18 @@
       <div class="hidden navbar-center lg:flex">
         <ul class="p-0 menu menu-horizontal">
           <li>
-            <nuxt-link class="uppercase font-bold" to="/mint">Create</nuxt-link>
+            <nuxt-link class="font-bold uppercase" to="/mint">Create</nuxt-link>
           </li>
           <li>
-            <nuxt-link class="uppercase font-bold" to="/events"
+            <nuxt-link class="font-bold uppercase" to="/events"
               >Events</nuxt-link
             >
           </li>
           <li>
-            <nuxt-link to="/about" class="uppercase font-bold">About</nuxt-link>
+            <nuxt-link to="/about" class="font-bold uppercase">About</nuxt-link>
           </li>
           <li tabindex="0">
-            <a class="uppercase font-bold">
+            <a class="font-bold uppercase">
               More
               <svg
                 class="fill-current"
@@ -125,7 +125,7 @@
         <button class="btn btn-ghost btn-circle">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5"
+            class="w-5 h-5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -139,7 +139,7 @@
           </svg>
         </button>
         <!--    <nif-btn @click.prevent="wallety?.connect({ requestSignIn: true })">
-          <i class="cf cf-near mr-2"></i> NEAR Login
+          <i class="mr-2 cf cf-near"></i> NEAR Login
         </nif-btn>-->
         <div v-if="isConnected" class="user--details">
           <h3>{{ details.accountId }}</h3>
@@ -148,7 +148,7 @@
         <div v-if="isConnected" class="dropdown dropdown-end">
           <label
             tabindex="0"
-            class="btn btn-ghost rounded-full p-0 rounded-btn"
+            class="p-0 rounded-full btn btn-ghost rounded-btn"
           >
             <div class="avatar">
               <div class="w-8 rounded-full">
@@ -158,7 +158,7 @@
           </label>
           <ul
             tabindex="0"
-            class="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4"
+            class="p-2 mt-4 shadow menu dropdown-content bg-base-100 rounded-box w-52"
           >
             <li><nuxt-link to="/profile">Profile</nuxt-link></li>
             <li v-if="userType === 'Buyer'">
@@ -175,7 +175,7 @@
           class="capitalize btn def--btn"
           @click.prevent="openLogin = true"
         >
-          <i class="cf cf-near mr-2"></i> NEAR Login
+          <i class="mr-2 cf cf-near"></i> NEAR Login
         </a>
       </div>
     </div>
@@ -184,11 +184,11 @@
       class="my--modal"
       :class="openLogin ? 'active--modal' : ''"
     >
-      <div class="my-modal--content relative">
+      <div class="relative my-modal--content">
         <a href="#" @click="openLogin = false"
           ><b-icon class="absolute close-icon" icon="close" type="is-white"
         /></a>
-        <h3 class="w-full mb-5 text-center font-bold text-white text-2xl">
+        <h3 class="w-full mb-5 text-2xl font-bold text-center text-white">
           Login to Niftiqet
         </h3>
         <div class="user-type--picker">
@@ -203,7 +203,7 @@
           </b-field>
         </div>
         <button
-          class="mt-6 w-full capitalize btn def--btn"
+          class="w-full mt-6 capitalize btn def--btn"
           @click.prevent="login()"
         >
           Continue to NEAR Wallet
@@ -269,12 +269,13 @@ export default {
   methods: {
     async login() {
       console.log('login in')
-      await this.wallet.activeWallet.requestSignIn({
-        successUrl: `${this.address}/${
-          this.userType === 'Buyer' ? 'events' : 'mint'
-        }`,
-        failureUrl: `${this.address}`,
-      })
+      await store.wallet?.connect({ requestSignIn: true })
+      // await this.wallet.activeWallet.requestSignIn({
+      //   successUrl: `${this.address}/${
+      //     this.userType === 'Buyer' ? 'events' : 'mint'
+      //   }`,
+      //   failureUrl: `${this.address}`,
+      // })
     },
     async disconnectWallet() {
       await this.store?.wallet?.disconnect()
