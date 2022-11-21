@@ -5,7 +5,7 @@
       :style="eventBG"
     >
       <div class="container flex flex-col justify-center">
-        <h4>Google Extended meetup</h4>
+        <h4>{{ tokenTitle }}</h4>
         <div class="text-sm breadcrumbs">
           <ul>
             <li><nuxt-link to="/">Home</nuxt-link></li>
@@ -91,12 +91,24 @@ export default {
 
     return { store }
   },
+  data() {
+    return {
+      sellTicket: false,
+      activeToken: '',
+    }
+  },
   computed: {
     eventBG() {
       if (this.activeTokens.length) {
         if (this.activeTokens[0].reference_blob?.animation_url) {
           return `background: url(${this.activeTokens[0].reference_blob?.animation_url})`
         }
+      }
+      return ''
+    },
+    tokenTitle() {
+      if (this.activeTokens.length) {
+        return this.activeTokens[0].title
       }
       return ''
     },

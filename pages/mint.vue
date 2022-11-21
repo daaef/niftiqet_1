@@ -165,7 +165,54 @@
                     Excursion
                   </b-radio-button>
                 </b-field>
+              </div><div>
+              <b-field label="Quantity" class="primary-btns relative">
+                <b-numberinput
+                  v-model="amount"
+                  :placeholder="2"
+                ></b-numberinput>
+              </b-field>
+            </div>
+              <no-ssr>
+                <div>
+                  <b-field label="Location">
+                    <b-input
+                      v-model="venue"
+                      placeholder="Venue of Event"
+                    ></b-input>
+                  </b-field>
+                </div>
+                <div>
+                  <b-field label="Select a date">
+                    <b-datepicker
+                      v-model="selected"
+                      :show-week-number="showWeekNumber"
+                      :locale="locale"
+                      placeholder="Click to select..."
+                      icon="calendar-today"
+                      :icon-right="selected ? 'close-circle' : ''"
+                      icon-right-clickable
+                      trap-focus
+                      @icon-right-click="clearDate"
+                    >
+                    </b-datepicker>
+                  </b-field>
+                </div>
+              </no-ssr>
+              <div>
+                <b-field label="Set Time">
+                  <b-timepicker
+                    v-model="eventTime"
+                    placeholder="Time of Event"
+                    icon="clock"
+                    :enable-seconds="enableSeconds"
+                    :hour-format="hourFormat"
+                    :locale="locale"
+                  >
+                  </b-timepicker>
+                </b-field>
               </div>
+            </div>
               <div class="flex action--btns mt-12 justify-between">
                 <button
                   class="btn normal-case btn-error"

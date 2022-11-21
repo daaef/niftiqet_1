@@ -653,6 +653,10 @@ main {
   & > * {
     position: relative;
     z-index: 20;
+    &.my-navigation {
+      z-index: 30;
+      position: fixed;
+    }
   }
   &:before {
     content: '';
