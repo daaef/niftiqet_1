@@ -1,35 +1,8 @@
 <template>
   <div class="relative">
-    <div class="menu event--card-menu dark:text-base-content/60">
-      <div class="dropdown dropdown-end">
-        <label tabindex="0" class="cursor-pointer">
-          <img src="/dots.svg" data-uk-svg alt="" />
-        </label>
-        <ul
-          tabindex="0"
-          class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
-        >
-          <li>
-            <a><i data-uk-icon="social"></i>Share</a>
-          </li>
-          <li>
-            <a><i class="isax isax-flag"></i>Report</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <nuxt-link to="/ticket" class="card event--card shadow-xl">
-      <div class="card--top">
-        <div class="cat">
-          <i class="isax isax-image"></i>
-        </div>
-      </div>
+    <nuxt-link :to="`/ticket/${meta.id}`" class="card event--card shadow-xl">
       <figure class="px-5 pt-5">
-        <img
-          :src="meta.reference_blob.media"
-          alt="Shoes"
-          class="rounded-xl"
-        />
+        <img :src="meta.reference_blob.media" alt="Shoes" class="rounded-xl" />
       </figure>
       <div class="card-body px-5 pt-5 text-left">
         <h3>{{ meta.title }}</h3>

@@ -1,8 +1,8 @@
 import { gql } from 'nuxt-graphql-request'
 
 export const minterStores = gql`
-    query FetchMinterStores($minter: String!) {
-    mb_store_minters(where: {minter_id: {_eq: $minter}}) {
+  query FetchMinterStores($minter: String!) {
+    mb_store_minters(where: { minter_id: { _eq: $minter } }) {
       minter_id
       nft_contracts {
         id
@@ -13,50 +13,88 @@ export const minterStores = gql`
 `
 
 export const nftTokens = gql`
-    query FetchNFTTokens($contractId: String!) {
-      nft_tokens(where: {nft_contract_id: {_eq: $contractId}}) {
+  query FetchNFTTokens($metadataId: String!) {
+    mb_views_nft_tokens(where: { metadata_id: { _eq: $metadataId } }) {
+      extra
+      base_uri
+      description
+      media
+      media_hash
+      metadata_content_flag
+      mint_memo
+      minted_receipt_id
+      minted_timestamp
       minter
-      nft_contract {
-        id
-        name
-        owner_id
-        spec
-        symbol
-      }
-      burned_receipt_id
-      burned_timestamp
       owner
+      reference
+      reference_blob
+      reference_hash
+      royalties_percent
+      token_id
+      nft_contract_reference
+      nft_contract_owner_id
+      nft_contract_name
+      nft_contract_is_mintbase
+      nft_contract_id
+      nft_contract_icon
+      nft_contract_created_at
+      nft_contract_content_flag
+      title
+      splits
+      royalties
+      copies
+      listings {
+        accepted_at
+        currency
+        kind
+        price
+        token_id
+        market_id
+        listed_by
+        created_at
+        approval_id
+        accepted_offer_id
+        offers {
+          offer_price
+          offered_at
+          offered_by
+          outbid_at
+          receipt_id
+          referral_amount
+          referrer_id
+          token_id
+          withdrawn_at
+        }
+      }
     }
   }
 `
 
 export const nftMetadata = gql`
-    query FetchNFTMetadata($ownerId: String!) {
-      nft_metadata(
-        where: {nft_contract: {owner_id: {_eq:  $ownerId}}}
-      ) {
-          base_uri
-          description
-          extra
-          id
-          media
-          media_hash
-          nft_contract {
-            name
-            owner_id
-            id
-            reference
-          }
-          reference_blob
-          reference
-          title
-          nft_contract_id
-          nft_contracts {
-            reference
-            owner_id
-            name
-          }
-        }
+  query FetchNFTMetadata($ownerId: String!) {
+    nft_metadata(where: { nft_contract: { owner_id: { _eq: $ownerId } } }) {
+      base_uri
+      description
+      extra
+      id
+      media
+      media_hash
+      nft_contract {
+        name
+        owner_id
+        id
+        reference
+      }
+      reference_blob
+      reference
+      title
+      nft_contract_id
+      nft_contracts {
+        reference
+        owner_id
+        name
+      }
+    }
   }
 `
 
@@ -84,27 +122,26 @@ export const nftActivities = gql`
 `
 
 export const fetchMinters = gql`
-    query FetchMinters($contractId: String!) {
-        mb_store_minters(where: {nft_contract_id: {_eq: $contractId}}) {
-        nft_contract {
-          name
-          owner_id
-        }
-        minter_id
+  query FetchMinters($contractId: String!) {
+    mb_store_minters(where: { nft_contract_id: { _eq: $contractId } }) {
+      nft_contract {
+        name
+        owner_id
       }
+      minter_id
+    }
   }
 `
 
-
 export const fetchStore = gql`
-    query FetchContract($contractId: String!) {
-        mb_store_minters(where: {nft_contract_id: {_eq: $contractId}}) {
-        nft_contract {
-          name
-          owner_id
-        }
-        minter_id
+  query FetchContract($contractId: String!) {
+    mb_store_minters(where: { nft_contract_id: { _eq: $contractId } }) {
+      nft_contract {
+        name
+        owner_id
       }
+      minter_id
+    }
   }
 `
 

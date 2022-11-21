@@ -73,7 +73,12 @@
       <div class="hidden navbar-center lg:flex">
         <ul class="p-0 menu menu-horizontal">
           <li>
-            <nuxt-link class="uppercase font-bold" to="/mint">Events</nuxt-link>
+            <nuxt-link class="uppercase font-bold" to="/mint">Create</nuxt-link>
+          </li>
+          <li>
+            <nuxt-link class="uppercase font-bold" to="/events"
+              >Events</nuxt-link
+            >
           </li>
           <li>
             <nuxt-link to="/about" class="uppercase font-bold">About</nuxt-link>

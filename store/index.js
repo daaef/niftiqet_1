@@ -1,5 +1,10 @@
 import { defineStore } from 'pinia'
-import { minterStores, fetchStore, nftMetadata } from "@/queries/queries";
+import {
+  minterStores,
+  fetchStore,
+  nftMetadata,
+  nftTokens,
+} from '@/queries/queries'
 
 export const useStore = defineStore('main', {
   state: () => ({
@@ -19,6 +24,7 @@ export const useStore = defineStore('main', {
     myStore: {},
     activeThing: {},
     userType: '',
+    activeTokens: {},
   }),
   actions: {
     setupWallet() {
@@ -53,9 +59,10 @@ export const useStore = defineStore('main', {
         const query = minterStores
         const variables = { minter: `${this.details.accountId}` }
         console.log('logging response')
-        await this.$nuxt.$graphql.default.request(query, variables)
-          .then(res => {
-            this.stores = res.mb_store_minters;
+        await this.$nuxt.$graphql.default
+          .request(query, variables)
+          .then((res) => {
+            this.stores = res.mb_store_minters
           })
         /* this.stores = data.mb_store_minters
         console.log('accountId is', await this.wallet)
@@ -78,14 +85,14 @@ export const useStore = defineStore('main', {
       await this.setupWallet().then(async () => {
         const query = nftMetadata
         const variables = {
-          ownerId:  `${this.details.accountId}`,
+          ownerId: `${this.details.accountId}`,
         }
-        await this.$nuxt.$graphql.default.request(query, variables)
-          .then(res => {
+        await this.$nuxt.$graphql.default
+          .request(query, variables)
+          .then((res) => {
             console.log('res is', res)
-            this.metadata = res.nft_metadata;
+            this.metadata = res.nft_metadata
           })
-
       })
     },
     async fetchUserStore(storeId) {
@@ -98,6 +105,14 @@ export const useStore = defineStore('main', {
       }
       const data = await this.$nuxt.$graphql.default.request(query, variables)
       this.myStore = data.store
+    },
+    async fetchNftTokens(metadataId) {
+      const query = nftTokens
+      const variables = {
+        metadataId,
+      }
+      const data = await this.$nuxt.$graphql.default.request(query, variables)
+      this.activeTokens = data.mb_views_nft_tokens
     },
   },
 })

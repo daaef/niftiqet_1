@@ -196,8 +196,8 @@ export default {
 </script>
 <style lang="scss">
 .what-we--do {
-  background-size: cover;
   background: url(/sect-bg2.png) no-repeat right 0;
+  background-size: cover;
   min-height: 100vh;
   display: flex;
   align-items: center;
