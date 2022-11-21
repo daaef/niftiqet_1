@@ -115,28 +115,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.ticket--btns {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  .btn {
-    text-transform: none;
-    margin-top: 10px;
-  }
-  .ticket--btn {
-  }
-}
-
-.ticket--set {
-  //position: relative;
-  display: grid;
-  grid-template-columns: 2.3fr 1.3fr;
-  grid-gap: 20px;
-  position: relative;
-}
-.ticket--data {
-  position: sticky;
-  top: 0;
-}
-</style>
+<style lang="scss"></style>

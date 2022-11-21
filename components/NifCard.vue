@@ -1,7 +1,11 @@
 <template>
   <div class="card shadow-xl">
     <figure class="px-5 pt-5">
-      <img src="https://placeimg.com/400/225/arch" alt="Shoes" class="rounded-xl" />
+      <img
+        src="https://placeimg.com/400/225/arch"
+        alt="Shoes"
+        class="rounded-xl"
+      />
     </figure>
     <div class="card-body px-5 pt-5 text-left">
       <p><i class="cf cf-near mr-2"></i> Tickets for Everyone</p>
@@ -31,29 +35,8 @@
 
 <script>
 export default {
-  name: "NifCard"
+  name: 'NifCard',
 }
 </script>
 
-<style lang="scss">
-.card {
-  background: hsl(var(--b1) / 0.3);
-  backdrop-filter: blur(10px);
-  transition: .3s ease-in-out;
-  &:hover {
-    background: hsl(var(--b1) / 0.5);
-  }
-  figure {
-    height: 200px;
-    img {
-      height: 100%;
-    }
-  }
-  .card-body {
-    align-items: flex-start;
-  }
-  .divider {
-    margin: 0;
-  }
-}
-</style>
+<style lang="scss"></style>

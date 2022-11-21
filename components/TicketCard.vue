@@ -41,34 +41,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.event--card-menu {
-  position: absolute;
-  top: 1.25em;
-  right: 1.25em;
-  z-index: 12;
-}
-.ticket--container {
-  overflow: hidden;
-  .card-actionz {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: rgba(19, 41, 72, 0.3);
-    backdrop-filter: blur(50px);
-    border-radius: 25px;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    transition: 0.3s ease-in-out;
-    transform: translateY(-100%);
-  }
-  &:hover {
-    .card-actionz {
-      transform: none;
-    }
-  }
-}
-</style>
+<style lang="scss"></style>

@@ -68,44 +68,4 @@ export default {
   },
 }
 </script>
-<style lang="scss">
-.about--sect {
-  min-height: 60vh;
-  display: flex;
-  align-items: center;
-  .about--container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
-    .left--sect {
-      padding-right: 30px;
-
-      .sect--title {
-        font-size: 1.7rem;
-        margin-bottom: 20px;
-        text-transform: uppercase;
-        font-weight: bold;
-      }
-
-      img {
-        height: 500px;
-        object-fit: contain;
-      }
-    }
-
-    .right--sect {
-      img {
-        height: 400px;
-      }
-    }
-  }
-}
-.what--can {
-  .sect-title {
-    font-weight: 500;
-  }
-  .how--grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-</style>
+<style lang="scss"></style>

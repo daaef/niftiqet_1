@@ -76,13 +76,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.modal-card {
-  padding: 40px;
-  background: #031f23;
-  border-radius: 25px;
-  h3 {
-    font-size: 1.3rem;
-  }
-}
-</style>
+<style lang="scss"></style>

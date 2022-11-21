@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="sticky top-0 w-full transition-colors my-navigation backdrop-blur-md bg-base-100/10"
+    class="sticky my-navigation top-0 w-full backdrop-blur-md bg-base-100/10 transition-colors"
   >
     <div class="container px-4 navbar">
       <div class="navbar-start">
@@ -73,18 +73,18 @@
       <div class="hidden navbar-center lg:flex">
         <ul class="p-0 menu menu-horizontal">
           <li>
-            <nuxt-link class="font-bold uppercase" to="/mint">Create</nuxt-link>
+            <nuxt-link class="uppercase font-bold" to="/mint">Create</nuxt-link>
           </li>
           <li>
-            <nuxt-link class="font-bold uppercase" to="/events"
+            <nuxt-link class="uppercase font-bold" to="/events"
               >Events</nuxt-link
             >
           </li>
           <li>
-            <nuxt-link to="/about" class="font-bold uppercase">About</nuxt-link>
+            <nuxt-link to="/about" class="uppercase font-bold">About</nuxt-link>
           </li>
           <li tabindex="0">
-            <a class="font-bold uppercase">
+            <a class="uppercase font-bold">
               More
               <svg
                 class="fill-current"
@@ -125,7 +125,7 @@
         <button class="btn btn-ghost btn-circle">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="w-5 h-5"
+            class="h-5 w-5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -139,7 +139,7 @@
           </svg>
         </button>
         <!--    <nif-btn @click.prevent="wallety?.connect({ requestSignIn: true })">
-          <i class="mr-2 cf cf-near"></i> NEAR Login
+          <i class="cf cf-near mr-2"></i> NEAR Login
         </nif-btn>-->
         <div v-if="isConnected" class="user--details">
           <h3>{{ details.accountId }}</h3>
@@ -148,7 +148,7 @@
         <div v-if="isConnected" class="dropdown dropdown-end">
           <label
             tabindex="0"
-            class="p-0 rounded-full btn btn-ghost rounded-btn"
+            class="btn btn-ghost rounded-full p-0 rounded-btn"
           >
             <div class="avatar">
               <div class="w-8 rounded-full">
@@ -158,7 +158,7 @@
           </label>
           <ul
             tabindex="0"
-            class="p-2 mt-4 shadow menu dropdown-content bg-base-100 rounded-box w-52"
+            class="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4"
           >
             <li><nuxt-link to="/profile">Profile</nuxt-link></li>
             <li v-if="userType === 'Buyer'">
@@ -173,9 +173,9 @@
         <a
           v-if="!isConnected"
           class="capitalize btn def--btn"
-          @click.prevent="openLogin = true"
+          @click.prevent="login"
         >
-          <i class="mr-2 cf cf-near"></i> NEAR Login
+          <i class="cf cf-near mr-2"></i> NEAR Login
         </a>
       </div>
     </div>
@@ -184,11 +184,11 @@
       class="my--modal"
       :class="openLogin ? 'active--modal' : ''"
     >
-      <div class="relative my-modal--content">
+      <div class="my-modal--content relative">
         <a href="#" @click="openLogin = false"
           ><b-icon class="absolute close-icon" icon="close" type="is-white"
         /></a>
-        <h3 class="w-full mb-5 text-2xl font-bold text-center text-white">
+        <h3 class="w-full mb-5 text-center font-bold text-white text-2xl">
           Login to Niftiqet
         </h3>
         <div class="user-type--picker">
@@ -203,7 +203,7 @@
           </b-field>
         </div>
         <button
-          class="w-full mt-6 capitalize btn def--btn"
+          class="mt-6 w-full capitalize btn def--btn"
           @click.prevent="login()"
         >
           Continue to NEAR Wallet
@@ -220,7 +220,7 @@ export default {
   name: 'NavBar',
   setup() {
     const store = useStore()
-
+    console.log('store is from setup', store)
     return { store }
   },
   data() {
@@ -249,6 +249,7 @@ export default {
     },
   },
   mounted() {
+    // console.log('store has', this.store)
     if (
       localStorage.getItem('theme') !== 'dark' &&
       localStorage.getItem('theme') !== 'light'
@@ -269,13 +270,12 @@ export default {
   methods: {
     async login() {
       console.log('login in')
-      await this.wallet?.connect({ requestSignIn: true })
-      // await this.wallet.activeWallet.requestSignIn({
-      //   successUrl: `${this.address}/${
-      //     this.userType === 'Buyer' ? 'events' : 'mint'
-      //   }`,
-      //   failureUrl: `${this.address}`,
-      // })
+      await this.wallet.activeWallet.requestSignIn({
+        successUrl: `${this.address}/${
+          this.userType === 'Buyer' ? 'events' : 'mint'
+        }`,
+        failureUrl: `${this.address}`,
+      })
     },
     async disconnectWallet() {
       await this.store?.wallet?.disconnect()
@@ -297,88 +297,4 @@ export default {
   },
 }
 </script>
-<style lang="scss">
-.my-navigation {
-  z-index: 30;
-  position: fixed;
-}
-.my--modal {
-  height: 100vh;
-  width: 100%;
-  z-index: 300;
-  background: rgba(0, 0, 0, 0.3);
-  position: fixed;
-  backdrop-filter: blur(300px);
-  top: 0;
-  left: 0;
-  justify-content: center;
-  align-items: center;
-  transition: 0.3s ease-in-out;
-  opacity: 0;
-  display: none;
-  &.active--modal {
-    display: flex;
-    opacity: 1;
-  }
-  .my-modal--content {
-    background: #1d2c39;
-    border-radius: 24px;
-    padding: 30px;
-    .close-icon {
-      right: 30px;
-    }
-    .user-type--picker {
-      background: #f2fafc;
-      border-radius: 16px;
-      padding: 15px 30px;
-      .field.has-addons {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 20px;
-        label {
-          border: 0 !important;
-          box-shadow: none !important;
-          outline: none !important;
-          background: transparent;
-          &.is-selected {
-            background: #0095c2;
-            border-radius: 12px;
-            position: relative;
-            span {
-              color: #fbffff;
-              position: relative;
-            }
-            &:before {
-              content: '';
-              position: absolute;
-              background: #0095c2;
-              width: calc(100% + 4px);
-              height: calc(100% + 4px);
-              left: -2px;
-              top: -2px;
-              border-radius: 12px;
-            }
-            &:after {
-              content: '';
-              position: absolute;
-              background: transparent;
-              width: 100%;
-              height: 100%;
-              left: 0;
-              top: 0;
-              border-radius: 12px;
-              border: 2px solid #fbffff;
-            }
-          }
-          span {
-            color: #0095c2;
-            font-weight: bold;
-          }
-          &:hover {
-          }
-        }
-      }
-    }
-  }
-}
-</style>
+<style lang="scss"></style>

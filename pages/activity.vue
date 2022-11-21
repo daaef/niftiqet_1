@@ -116,39 +116,4 @@
   </section>
 </template>
 
-<style lang="scss">
-.ticket--set {
-  //position: relative;
-  display: grid;
-  grid-template-columns: 2.3fr 1.3fr;
-  grid-gap: 20px;
-  .event--card-grid {
-    margin-top: 20px !important;
-  }
-  @media (max-width: 1024px) {
-    grid-template-columns: 1fr;
-  }
-}
-.field.is-floating-in-label
-  > .label
-  + .control:not(.datepicker):not(.timepicker):not(.taginput)
-  .input,
-.field.is-floating-in-label
-  > .label
-  + .control:not(.datepicker):not(.timepicker):not(.taginput)
-  .textarea,
-.field.is-floating-in-label
-  > .label
-  + .control:not(.datepicker):not(.timepicker):not(.taginput)
-  select {
-  padding-top: calc(5.25em * 0.5 - (1.5rem * 0.75) * 0.5);
-  padding-bottom: 1px;
-  min-height: 3.25em;
-  height: unset;
-}
-.activity--list {
-  display: grid;
-  grid-gap: 20px;
-  margin-top: 40px;
-}
-</style>
+<style lang="scss"></style>

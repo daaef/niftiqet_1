@@ -28,32 +28,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.activity--card {
-  display: grid;
-  padding: 20px;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
-  border: solid 1px hsl(var(--bc));
-  @media (max-width: 1024px) {
-    grid-template-columns: 1fr;
-  }
-  h3 {
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin-bottom: 5px;
-  }
-  p:not(:last-child) {
-    margin-bottom: 5px;
-  }
-  img {
-    border-radius: 12px;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  }
-  .card--content {
-    align-self: center;
-  }
-}
-</style>
+<style lang="scss"></style>

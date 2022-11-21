@@ -33,12 +33,4 @@
   </section>
 </template>
 
-<style lang="scss">
-.pagination {
-  .btn {
-    background: hsla(var(--b1) / 0.4);
-    backdrop-filter: blur(5px);
-    color: hsla(var(--bc) / 0.9);
-  }
-}
-</style>
+<style lang="scss"></style>
