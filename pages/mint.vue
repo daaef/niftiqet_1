@@ -18,6 +18,16 @@
             <div
               class="bg-base-100/30 backdrop-blur min-h-screen my-5 rounded-2xl py-16 px-14"
             >
+              <div class="mb-10">
+                <h4>Don't have a store?</h4>
+                <a
+                  class="button mt-3 is-primary"
+                  href="#"
+                  @click.prevent="createStore = true"
+                >
+                  <span class="has-text-weight-semibold"> Create Store </span>
+                </a>
+              </div>
               <div class="mb-12">
                 <div class="form-control w-full">
                   <label class="label">
@@ -156,109 +166,6 @@
                   </b-radio-button>
                 </b-field>
               </div>
-              <!--              <div class="tickets&#45;&#45;grid mt-12">
-                <div class="radios">
-                  <b-field>
-                    <b-radio v-model="price_category" native-value="SINGLE">
-                      SINGLE
-                    </b-radio>
-                  </b-field>
-                  <b-field>
-                    <b-radio v-model="price_category" native-value="COUPLES">
-                      COUPLES
-                    </b-radio>
-                  </b-field>
-                  <b-field>
-                    <b-radio v-model="price_category" native-value="VIP">
-                      VIP
-                    </b-radio>
-                  </b-field>
-                  <b-field>
-                    <b-radio v-model="price_category" native-value="VVIP">
-                      VVIP
-                    </b-radio>
-                  </b-field>
-                </div>
-                <div class="cost relative">
-                  <div tabindex="0" class="collapse collapse-arrow">
-                    <input type="checkbox" checked />
-                    <div class="collapse-title text-sm font-bold">
-                      Ticket Cost for {{ price_category }}
-                    </div>
-                    <div class="collapse-content">
-                      <b-field>
-                        <b-input
-                          v-model="ticketCost"
-                          placeholder="3 NEAR"
-                        ></b-input>
-                      </b-field>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <b-field label="Quantity" class="primary-btns relative">
-                    <b-numberinput
-                      v-model="amount"
-                      :placeholder="2"
-                    ></b-numberinput>
-                  </b-field>
-                </div>
-                <no-ssr>
-                  <div>
-                    <b-field label="Location">
-                      <b-input
-                        v-model="venue"
-                        placeholder="Venue of Event"
-                      ></b-input>
-                    </b-field>
-                  </div>
-                  <div>
-                    <b-field label="Select a date">
-                      <b-datepicker
-                        v-model="selected"
-                        :show-week-number="showWeekNumber"
-                        :locale="locale"
-                        placeholder="Click to select..."
-                        icon="calendar-today"
-                        :icon-right="selected ? 'close-circle' : ''"
-                        icon-right-clickable
-                        trap-focus
-                        @icon-right-click="clearDate"
-                      >
-                      </b-datepicker>
-                    </b-field>
-                  </div>
-                </no-ssr>
-                <div>
-                  <b-field label="Set Time">
-                    <b-timepicker
-                      v-model="eventTime"
-                      placeholder="Time of Event"
-                      icon="clock"
-                      :enable-seconds="enableSeconds"
-                      :hour-format="hourFormat"
-                      :locale="locale"
-                    >
-                    </b-timepicker>
-                  </b-field>
-                </div>
-              </div>-->
-              <!--              <div class="mt-12">
-                <b-field label="Royalties">
-                  <b-input
-                    v-model="royalties"
-                    placeholder="How to share royalties"
-                  ></b-input>
-                </b-field>
-              </div>
-              <div class="mt-12">
-                <b-field label="Split Revenue">
-                  <b-input
-                    v-model="splits"
-                    placeholder="How to Split Revenue"
-                  ></b-input>
-                </b-field>
-              </div>-->
               <div class="flex action--btns mt-12 justify-between">
                 <button
                   class="btn normal-case btn-error"
@@ -279,6 +186,20 @@
         </div>
       </section>
     </main>
+    <b-modal
+      v-model="createStore"
+      has-modal-card
+      trap-focus
+      :destroy-on-hide="false"
+      aria-role="dialog"
+      aria-label="Example Modal"
+      close-button-aria-label="Close"
+      aria-modal
+    >
+      <template #default="props">
+        <StoreForm @close="props.close" />
+      </template>
+    </b-modal>
   </section>
 </template>
 
@@ -295,6 +216,8 @@ export default {
   },
   data() {
     return {
+      createStore: false,
+      sellTicket: false,
       event_category: '',
       price_category: 'VVIP',
       event_banner: {},
