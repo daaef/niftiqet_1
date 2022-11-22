@@ -1,6 +1,10 @@
 <template>
   <div class="relative ticket--container">
-    <a href="#" class="card event--card shadow-xl">
+    <a
+      href="#"
+      class="card event--card shadow-xl"
+      :class="meta?.burned_timestamp ? 'bg-error' : ''"
+    >
       <figure>
         <img :src="meta.reference_blob.media" alt="Shoes" class="rounded-xl" />
       </figure>
@@ -22,13 +26,14 @@
       </div>
     </a>
     <div class="card-actionz">
-      <div class="ticket--btns w-full">
-        <NifBtn
+      <div v-if="!meta?.burned_timestamp" class="ticket--btns w-full">
+        <button
           v-if="meta.listings.length && meta.owner !== details.accountId"
-          class="btn w-full"
-          @click="buyTicket($event, meta?.id, meta?.listings?.price)"
-          >Buy
-        </NifBtn>
+          class="btn def--btn w-full"
+          @click="buyTicket"
+        >
+          Buy
+        </button>
         <button
           v-if="!meta.listings.length && meta.owner === details.accountId"
           class="btn w-full"
@@ -43,6 +48,9 @@
         >
           Burn
         </button>
+      </div>
+      <div v-else class="text-center">
+        <h3 class="text-error text-3xl font-black">BURNED</h3>
       </div>
     </div>
     <b-modal
@@ -115,9 +123,9 @@ export default {
     },
     burnTicket(_, token) {
       this.wallet
-        ?.burn([`${this.meta?.id}`])
-        .then(() => {
-          this.$buefy.toast.open('Ticket Burnt Successfully!')
+        ?.burn([`${this.meta?.token_id}`], this.meta?.nft_contract_id)
+        .then((res) => {
+          console.log('res is', res)
         })
         .catch(() => {
           this.$buefy.toast.open({
@@ -139,15 +147,26 @@ export default {
         onConfirm: () => this.burnTicket(),
       })
     },
-    buyTicket(_, tokenId, price) {
+    buyTicket() {
       console.log('buying ticket')
       this.wallet?.makeOffer(
-        tokenId,
-        Number(price).toLocaleString('fullwide', { useGrouping: false })
+        `${this.meta?.token_id}:${this.meta?.nft_contract_id}`,
+        Number(
+          this.meta.listings[this.meta.listings.length - 1].price
+        ).toLocaleString('fullwide', {
+          useGrouping: false,
+        })
       )
     },
   },
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.card.bg-error {
+  background-color: hsl(var(--er) / 0.4);
+}
+.ticket--btns.hidden {
+  display: none;
+}
+</style>

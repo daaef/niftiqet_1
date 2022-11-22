@@ -49,7 +49,7 @@ export default {
         if (this.userType === 'Buyer') {
           return token?.listings.length > 0
         } else {
-          return token
+          return token.minter === this.details.accountId
         }
       })
     },

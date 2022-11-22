@@ -17,6 +17,8 @@ export const nftTokens = gql`
     mb_views_nft_tokens(where: { metadata_id: { _eq: $metadataId } }) {
       extra
       base_uri
+      burned_receipt_id
+      burned_timestamp
       description
       media
       media_hash
@@ -74,6 +76,8 @@ export const nftTokensBySplits = gql`
     mb_views_nft_tokens(where: { splits: { _has_key: $metadataId } }) {
       extra
       base_uri
+      burned_receipt_id
+      burned_timestamp
       description
       media
       media_hash

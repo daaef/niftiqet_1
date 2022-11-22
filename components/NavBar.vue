@@ -25,44 +25,21 @@
             tabindex="0"
             class="p-2 mt-3 shadow menu dropdown-content rounded-box w-52"
           >
-            <li><a>Marketplace</a></li>
-            <li tabindex="0">
-              <a class="justify-between">
-                Resources
-                <svg
-                  class="fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"
-                  />
-                </svg>
-              </a>
-              <ul class="p-2">
-                <li>
-                  <a><i class="isax isax-profile-2user"></i> About Us</a>
-                </li>
-                <li>
-                  <a><i class="isax isax-call"></i> Contact Us</a>
-                </li>
-                <li>
-                  <a><i class="isax isax-arrow"></i> Royalties</a>
-                </li>
-                <li>
-                  <nuxt-link to="/collections">
-                    <i class="isax isax-element-equal"></i>
-                    Collections
-                  </nuxt-link>
-                </li>
-                <li>
-                  <a><i class="isax isax-info-circle"></i> Blog</a>
-                </li>
-              </ul>
+            <li>
+              <nuxt-link to="/about" class="uppercase font-bold"
+                >About</nuxt-link
+              >
             </li>
-            <li><a>Create</a></li>
+            <li>
+              <nuxt-link class="uppercase font-bold" to="/events"
+                >Events</nuxt-link
+              >
+            </li>
+            <li v-if="userType !== 'Buyer'">
+              <nuxt-link class="uppercase font-bold" to="/mint">
+                Create
+              </nuxt-link>
+            </li>
           </ul>
         </div>
         <nuxt-link to="/" class="text-xl normal-case btn btn-ghost logo--link">
@@ -130,7 +107,7 @@
               <a href="#" @click="createTickets">Create Tickets</a>
             </li>
             <li v-else><a href="#" @click="buyTickets">Buy Tickets</a></li>
-            <li><nuxt-link to="/activity">Activity</nuxt-link></li>
+            <!--            <li><nuxt-link to="/activity">Activity</nuxt-link></li>-->
             <li><a @click="disconnectWallet">Logout</a></li>
           </ul>
         </div>

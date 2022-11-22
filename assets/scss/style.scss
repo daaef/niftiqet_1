@@ -299,6 +299,7 @@ span {
   &:hover {
     .card-actionz {
       transform: none;
+      justify-content: center;
     }
   }
 }
@@ -639,8 +640,8 @@ main {
   }
 }
 .modal-card {
-  padding: 40px;
-  background: $primary;
+  padding: 20px;
+  background: #182249;
   border-radius: 25px;
   h3 {
     font-size: 1.3rem;
@@ -1182,4 +1183,16 @@ main {
 .ticket--data {
   position: sticky;
   top: 0;
+}
+.modal {
+  .modal-card-head,
+  .modal-card-body,
+  .modal-card-foot {
+    border: none !important;
+    background: #182249;
+  }
+}
+
+.modal-card-title {
+  color: #fafafa;
 }
