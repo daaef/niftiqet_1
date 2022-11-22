@@ -1,12 +1,12 @@
 <template>
   <div v-if="events.length" class="">
     <div
-      v-for="(event, i) in events"
+      v-for="(event, i) in sortedStores"
       :key="i"
       class="event--card-grid"
       :class="gridSize === 3 ? 'three' : 'two'"
     >
-      <h3 class="capitalize font-medium text-xl">
+      <h3 v-if="event.length" class="capitalize font-medium text-xl">
         {{ event[0].nft_contract_name }} Store
       </h3>
       <div v-for="meta in event" :key="meta.id">
@@ -53,6 +53,23 @@ export default {
     }
   },
   computed: {
+    sortedStores() {
+      return this.events.map((event) => {
+        // eslint-disable-next-line no-return-assign,no-sequences
+        return event
+          .map((meta) => {
+            if (meta?.listings?.length && this.userType === 'Buyer') {
+              return meta
+            } else if (this.userType === 'Creator') {
+              return meta
+            }
+            return null
+          })
+          .filter((event) => {
+            return event !== null
+          })
+      })
+    },
     ...mapWritableState(useStore, [
       'wallet',
       'details',
@@ -61,6 +78,7 @@ export default {
       'stores',
       'metadata',
       'myStores',
+      'userType',
     ]),
   },
   async mounted() {
@@ -71,6 +89,7 @@ export default {
         if (this.myStores.hasOwnProperty(key)) {
           // console.log(`${key}: ${this.myStores[key]}`)
           this.events.push(this.myStores[key])
+          console.log(this.sortedStores)
         }
       }
     }

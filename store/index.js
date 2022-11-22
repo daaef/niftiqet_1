@@ -36,7 +36,7 @@ export const useStore = defineStore('main', {
     myStores: {},
     activeThing: {},
     userType: '',
-    activeTokens: {},
+    activeTokens: [],
   }),
   actions: {
     setupWallet() {

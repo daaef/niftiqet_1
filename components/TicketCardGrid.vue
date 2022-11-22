@@ -5,7 +5,7 @@
     :class="gridSize === 3 ? 'three' : 'two'"
   >
     <ticket-card
-      v-for="token in activeTokens"
+      v-for="token in sortedTickets"
       :key="token.id"
       :meta="token"
       :self="linkSelf"
@@ -44,6 +44,15 @@ export default {
     return { store }
   },
   computed: {
+    sortedTickets() {
+      return this.activeTokens?.filter((token) => {
+        if (this.userType === 'Buyer') {
+          return token?.listings.length > 0
+        } else {
+          return token
+        }
+      })
+    },
     ...mapWritableState(useStore, [
       'wallet',
       'details',
@@ -52,6 +61,7 @@ export default {
       'stores',
       'metadata',
       'activeTokens',
+      'userType',
     ]),
   },
   async mounted() {

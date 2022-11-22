@@ -75,7 +75,7 @@
           <li>
             <nuxt-link to="/about" class="uppercase font-bold">About</nuxt-link>
           </li>
-          <li v-if="userType !== 'Creator'">
+          <li>
             <nuxt-link class="uppercase font-bold" to="/events"
               >Events</nuxt-link
             >
@@ -243,6 +243,12 @@ export default {
     async login() {
       console.log('login in')
       await this.wallet?.connect({ requestSignIn: true })
+      /* await this.wallet.activeWallet.requestSignIn({
+        successUrl: `${this.address}/${
+          this.userType === 'Buyer' ? 'events' : 'mint'
+        }`,
+        failureUrl: `${this.address}`,
+      }) */
     },
     async disconnectWallet() {
       await this.store?.wallet?.disconnect()

@@ -29,10 +29,18 @@
           @click="buyTicket($event, meta?.id, meta?.listings?.price)"
           >Buy
         </NifBtn>
-        <button v-if="!meta.listings.length" class="btn w-full" @click="sell">
+        <button
+          v-if="!meta.listings.length && meta.owner === details.accountId"
+          class="btn w-full"
+          @click="sell"
+        >
           Sell
         </button>
-        <button class="btn w-full btn-error text-white" @click="confirmBurn">
+        <button
+          v-if="meta.owner === details.accountId"
+          class="btn w-full btn-error text-white"
+          @click="confirmBurn"
+        >
           Burn
         </button>
       </div>
