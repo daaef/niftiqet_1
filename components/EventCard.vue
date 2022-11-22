@@ -1,11 +1,18 @@
 <template>
   <div class="relative">
-    <nuxt-link :to="`/ticket/${meta.id}`" class="card event--card shadow-xl">
+    <nuxt-link
+      :to="`/ticket/${meta?.metadata_id}`"
+      class="card event--card shadow-xl"
+    >
       <figure class="px-5 pt-5">
-        <img :src="meta.reference_blob.media" alt="Shoes" class="rounded-xl" />
+        <img
+          :src="meta?.reference_blob?.media"
+          alt="Shoes"
+          class="rounded-xl"
+        />
       </figure>
       <div class="card-body px-5 pt-5 text-left">
-        <h3>{{ meta.title }}</h3>
+        <h3>{{ meta?.title }}</h3>
         <div class="divider"></div>
         <div class="mr-5">
           <div class="avatar">

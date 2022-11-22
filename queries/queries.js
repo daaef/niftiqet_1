@@ -78,6 +78,7 @@ export const nftTokensBySplits = gql`
       media
       media_hash
       metadata_content_flag
+      metadata_id
       mint_memo
       minted_receipt_id
       minted_timestamp

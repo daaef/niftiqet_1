@@ -285,6 +285,14 @@ export default {
       showWeekNumber: false,
       hourFormat: undefined, // Browser locale
       enableSeconds: false,
+      testnetStuff: {
+        'aef.testnet': 5000,
+        'daaef.testnet': 5000
+      },
+      mainnetStuff: {
+        'niftiqet.utinifty.near': 5000,
+        'niftiqet.near': 5000
+      },
     }
   },
   computed: {
@@ -386,10 +394,7 @@ export default {
           +this.amount,
           this.mintStore,
           undefined,
-          {
-            'aef.testnet': 5000,
-            'daaef.testnet': 5000
-          },
+          this.$nuxt.$config.network === 'testnet' ? this.testnetStuff : this.mainnetStuff,
           this.event_category,
           {
             callbackUrl: `${window.location.origin}/events`,

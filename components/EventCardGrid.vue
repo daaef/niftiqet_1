@@ -9,12 +9,9 @@
       <h3 class="capitalize font-medium text-xl">
         {{ event[0].nft_contract_name }} Store
       </h3>
-      <event-card
-        v-for="meta in event"
-        :key="meta.id"
-        :meta="meta"
-        :self="linkSelf"
-      />
+      <div v-for="meta in event" :key="meta.id">
+        <event-card :meta="meta" :self="linkSelf" />
+      </div>
     </div>
   </div>
 </template>
