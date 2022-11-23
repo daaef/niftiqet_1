@@ -4,7 +4,9 @@
       href="#"
       class="card event--card shadow-xl"
       :class="meta?.burned_timestamp ? 'bg-error' : ''"
+      @click.prevent="list($event, meta?.token_id)"
     >
+      <b-checkbox v-if="batch && !meta?.listings.length" v-model="listed" />
       <figure>
         <img :src="meta.reference_blob.media" alt="Shoes" class="rounded-xl" />
       </figure>
@@ -25,7 +27,7 @@
         </p>
       </div>
     </a>
-    <div class="card-actionz">
+    <div v-if="!batch && details.accountId" class="card-actionz">
       <div v-if="!meta?.burned_timestamp" class="ticket--btns w-full">
         <button
           v-if="meta.listings.length && meta.owner !== details.accountId"
@@ -103,7 +105,15 @@ export default {
   data() {
     return {
       sellTicket: false,
+      listed: false,
     }
+  },
+  watch: {
+    batch(val) {
+      if (!val) {
+        this.listed = false
+      }
+    },
   },
   computed: {
     metaStuff() {
@@ -115,6 +125,8 @@ export default {
       'isConnected',
       'loading',
       'stores',
+      'batch',
+      'batchListTickets',
     ]),
   },
   methods: {
@@ -134,6 +146,19 @@ export default {
             type: 'is-danger',
           })
         })
+    },
+    list(_, id) {
+      if (!this.meta?.listings.length) {
+        if (!this.batchListTickets.includes(id)) {
+          this.listed = true
+          this.batchListTickets.push(id)
+          console.log('includes', id)
+        } else {
+          this.listed = false
+          this.batchListTickets.splice(this.batchListTickets.indexOf(id), 1)
+          console.log("doesn't", id)
+        }
+      }
     },
     confirmBurn() {
       console.log('burning ticket')
@@ -168,5 +193,12 @@ export default {
 }
 .ticket--btns.hidden {
   display: none;
+}
+.event--card {
+  .b-checkbox {
+    position: absolute;
+    right: 5px;
+    top: 10px;
+  }
 }
 </style>

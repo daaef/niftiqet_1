@@ -18,6 +18,21 @@
     <main>
       <section class="home--body">
         <div class="cto--container container relative px-4 min-h-screen">
+          <div v-if="userType === 'Creator' && details.accountId" class="#">
+            <button
+              class="btn def--btn capitalize mr-3"
+              @click="batch = !batch"
+            >
+              {{ batch ? 'Cancel batch' : 'Sell multiple tickets' }}
+            </button>
+            <button
+              v-if="batch && batchListTickets.length"
+              class="btn btn-success capitalize"
+              @click.prevent="batchList"
+            >
+              List selected
+            </button>
+          </div>
           <div class="ticket--set">
             <div class="grid--collection">
               <ticket-card-grid v-if="activeTokens" :grid-size="2" />
@@ -78,6 +93,25 @@
         </div>
       </section>
     </main>
+    <b-modal
+      v-model="sellTicket"
+      has-modal-card
+      trap-focus
+      :destroy-on-hide="false"
+      aria-role="dialog"
+      aria-label="Example Modal"
+      close-button-aria-label="Close"
+      aria-modal
+    >
+      <template #default="props">
+        <SellForm
+          :store-id="activeTokens[0]?.nft_contract_id"
+          :token-id="batchListTickets"
+          :batch-sell="true"
+          @close="props.close"
+        />
+      </template>
+    </b-modal>
   </section>
 </template>
 
@@ -97,6 +131,13 @@ export default {
       sellTicket: false,
       activeToken: '',
     }
+  },
+  watch: {
+    batch(val) {
+      if (!val) {
+        this.batchListTickets = []
+      }
+    },
   },
   computed: {
     eventBG() {
@@ -119,13 +160,21 @@ export default {
       'isConnected',
       'loading',
       'stores',
+      'userType',
       'activeTokens',
+      'batch',
+      'batchListTickets',
     ]),
   },
   async mounted() {
     await this.store.fetchNftTokens(`${this.$route.params.id}`)
 
     console.log('stuff is', this.activeTokens)
+  },
+  methods: {
+    batchList() {
+      this.sellTicket = true
+    },
   },
 }
 </script>

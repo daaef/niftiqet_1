@@ -19,6 +19,7 @@ function ObjGroupBy(list, key) {
 
 export const useStore = defineStore('main', {
   state: () => ({
+    batch: false,
     wallet: undefined,
     details: {
       accountId: '',
@@ -37,6 +38,7 @@ export const useStore = defineStore('main', {
     activeThing: {},
     userType: '',
     activeTokens: [],
+    batchListTickets: [],
   }),
   actions: {
     setupWallet() {

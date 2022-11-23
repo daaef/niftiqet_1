@@ -1,7 +1,7 @@
 <template>
   <div v-if="events.length" class="">
     <div
-      v-for="(event, i) in stor"
+      v-for="(event, i) in sortedStores"
       :key="i"
       class="event--card-grid"
       :class="gridSize === 3 ? 'three' : 'two'"
@@ -73,16 +73,18 @@ export default {
       })
     },
     sortedStores() {
-      return this.events.map((event) => {
+      return this.stor.map((event) => {
         // eslint-disable-next-line no-return-assign,no-sequences
         return event
           .map((meta) => {
             if (meta?.listings?.length && this.userType === 'Buyer') {
               return meta
-            } else if (this.userType === 'Creator') {
+            } else if (
+              this.userType === 'Creator' &&
+              meta?.minter === this.details.accountId
+            ) {
               return meta
-            }
-            return null
+            } else return null
           })
           .filter((event) => {
             return event !== null

@@ -1,6 +1,8 @@
 <template>
   <div class="modal-card" style="width: auto">
-    <h3 class="has-text-weight-semibold has-text-white">Sell Ticket</h3>
+    <h3 class="has-text-weight-semibold has-text-white">
+      {{ batchSell ? 'Batch ' : '' }}Sell Ticket
+    </h3>
     <form class="mt-5" action="">
       <div class="field">
         <label class="label has-text-white">Ticket Price</label>
@@ -36,11 +38,17 @@ export default {
   props: {
     tokenId: { type: String, default: null, required: false },
     storeId: { type: String, default: null, required: false },
+    batchSell: {
+      type: Boolean,
+      default() {
+        return false
+      },
+      required: false,
+    },
   },
   data() {
     return {
       price: '',
-      loading: false,
     }
   },
   computed: {
@@ -66,11 +74,19 @@ export default {
         })
         return
       }
-      this.wallet?.list(
-        `${this.tokenId}`,
-        `${this.storeId}`,
-        `${this.parsedPrice}`
-      )
+      if (this.batchSell) {
+        this.wallet?.batchList(
+          this.tokenId,
+          `${this.storeId}`,
+          `${this.parsedPrice}`
+        )
+      } else {
+        this.wallet?.list(
+          `${this.tokenId}`,
+          `${this.storeId}`,
+          `${this.parsedPrice}`
+        )
+      }
     },
   },
 }

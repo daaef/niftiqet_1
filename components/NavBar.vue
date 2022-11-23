@@ -230,6 +230,7 @@ export default {
     async disconnectWallet() {
       await this.store?.wallet?.disconnect()
       await this.store?.setupWallet()
+      location.reload()
     },
     toggleTheme() {
       const savedTheme = document.documentElement.getAttribute('data-theme')
