@@ -263,6 +263,7 @@ span {
     height: 200px;
     img {
       height: 100%;
+      object-fit: cover;
     }
   }
   .card-body {

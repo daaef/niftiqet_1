@@ -114,6 +114,7 @@
         <a
           v-if="!isConnected"
           class="capitalize btn def--btn"
+          :class="loading ? 'loading' : ''"
           @click.prevent="login"
         >
           <i class="cf cf-near mr-2"></i> NEAR Login

@@ -57,7 +57,18 @@ export default {
       return this.events.map((event) => {
         // eslint-disable-next-line array-callback-return
         return event
-          .sort()
+          .sort((a, b) => {
+            const fa = a.title.toLowerCase()
+            const fb = b.title.toLowerCase()
+
+            if (fa < fb) {
+              return -1
+            }
+            if (fa > fb) {
+              return 1
+            }
+            return 0
+          })
           .map((meta, i) => {
             if (i === 0) {
               return meta

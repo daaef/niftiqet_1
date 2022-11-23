@@ -13,14 +13,6 @@
       </figure>
       <div class="card-body px-5 pt-5 text-left">
         <h3>{{ meta?.title }}</h3>
-        <div class="divider"></div>
-        <div class="mr-5">
-          <div class="avatar">
-            <div class="w-5 rounded-full">
-              <img src="https://placeimg.com/192/192/people" alt="" />
-            </div>
-          </div>
-        </div>
       </div>
     </nuxt-link>
   </div>

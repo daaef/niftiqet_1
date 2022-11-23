@@ -221,6 +221,7 @@
                   Cancel
                 </button>
                 <button
+                  :class="isMinting ? 'loading': ''"
                   class="def--btn btn capitalize"
                   @click.prevent="mintTicket"
                 >

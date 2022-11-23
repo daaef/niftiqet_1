@@ -3,15 +3,28 @@
     <a
       href="#"
       class="card event--card shadow-xl"
-      :class="meta?.burned_timestamp ? 'bg-error' : ''"
+      :class="{ 'bg-error': meta?.burned_timestamp, 'bg-primary': listed }"
       @click.prevent="list($event, meta?.token_id)"
     >
+      <span
+        class="ticketId block absolute top-0 left-0 p-2 bg-primary text-black"
+        >{{ meta?.token_id }}</span
+      >
       <b-checkbox v-if="batch && !meta?.listings.length" v-model="listed" />
       <figure>
         <img :src="meta.reference_blob.media" alt="Shoes" class="rounded-xl" />
       </figure>
       <div class="card-body px-5 pt-5 text-left">
-        <h3 class="font-medium text-md">{{ meta.title }}</h3>
+        <h3 class="font-bold text-md">{{ meta.title }}</h3>
+        <p>
+          <span class="font-light">Time</span>:
+          {{ meta.reference_blob?.extra?.time?.substring(0, 10) }}
+        </p>
+        <p>
+          <span class="font-light">Venue</span>:
+          {{ meta?.reference_blob?.extra?.venue }}
+        </p>
+        <p><span class="font-light">Owner</span>: {{ meta.owner }}</p>
         <p class="font-bold">
           {{
             meta.listings.length
@@ -190,6 +203,10 @@ export default {
 <style lang="scss">
 .card.bg-error {
   background-color: hsl(var(--er) / 0.4);
+}
+.card.bg-primary {
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--p) / 0.4);
 }
 .ticket--btns.hidden {
   display: none;
