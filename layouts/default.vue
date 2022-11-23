@@ -26,8 +26,8 @@ export default {
     this.userType =
       localStorage.getItem('userType') || sessionStorage.getItem('userType')
     if (!this.userType) {
-      localStorage.setItem('userType', 'Buyer')
-      sessionStorage.setItem('userType', 'Buyer')
+      localStorage.setItem('userType', 'Creator')
+      sessionStorage.setItem('userType', 'Creator')
       this.userType =
         localStorage.getItem('userType') || sessionStorage.getItem('userType')
     }
