@@ -1,5 +1,5 @@
 <template>
-  <footer class="px-4 py-20 bg-base-100/20 backdrop-blur">
+  <footer class="bg-base-100/20 backdrop-blur py-20 px-4">
     <div class="container footer text-base-content">
       <div class="logo--set">
         <nuxt-link to="/" class="logo--link">

@@ -57,7 +57,11 @@ export default {
   },
   async mounted() {
     await this.store.fetchMinterStores()
-    await this.store.fetchNftTokensBySplit(`aef.testnet`)
+    await this.store.fetchNftTokensBySplit(
+      this.$nuxt.$config.network === 'testnet'
+        ? `aef.testnet`
+        : 'niftiqet.utinifty.near'
+    )
   },
 }
 </script>

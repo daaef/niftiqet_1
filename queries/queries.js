@@ -72,8 +72,8 @@ export const nftTokens = gql`
   }
 `
 export const nftTokensBySplits = gql`
-  query FetchNFTTokens($metadataId: String!) {
-    mb_views_nft_tokens(where: { splits: { _has_key: $metadataId } }) {
+  query FetchNFTTokens($splitAccount: String!) {
+    mb_views_nft_tokens(where: { splits: { _has_key: $splitAccount } }) {
       extra
       base_uri
       burned_receipt_id

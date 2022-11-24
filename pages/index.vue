@@ -3,9 +3,9 @@
     <home-header />
     <main>
       <section class="home--body what-we--do">
-        <div class="container px-4 cto--container">
-          <div class="flex items-center justify-between">
-            <div class="relative left--sect">
+        <div class="cto--container container px-4">
+          <div class="flex justify-between items-center">
+            <div class="left--sect relative">
               <div class="relative z-10">
                 <h3 class="sect--title">What We Do</h3>
                 <img src="/left-img.png" alt="" />
@@ -17,7 +17,7 @@
               >
                 <li class="mb-10 ml-6">
                   <span
-                    class="absolute flex items-center justify-center w-6 h-6 bg-blue-200 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900"
+                    class="flex absolute -left-3 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900"
                   >
                     <svg
                       aria-hidden="true"
@@ -48,7 +48,7 @@
                 </li>
                 <li class="mb-10 ml-6">
                   <span
-                    class="absolute flex items-center justify-center w-6 h-6 bg-blue-200 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900"
+                    class="flex absolute -left-3 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900"
                   >
                     <svg
                       aria-hidden="true"
@@ -77,7 +77,7 @@
                 </li>
                 <li class="ml-6">
                   <span
-                    class="absolute flex items-center justify-center w-6 h-6 bg-blue-200 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900"
+                    class="flex absolute -left-3 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900"
                   >
                     <svg
                       aria-hidden="true"
@@ -93,7 +93,7 @@
                       ></path>
                     </svg>
                   </span>
-                  <h3 class="mb-1 text-lg font-semibold text-success">
+                  <h3 class="mb-1 text-lg text-success font-semibold">
                     Decentralised Process
                   </h3>
                   <p
@@ -109,9 +109,9 @@
         </div>
       </section>
       <section class="home--body lots--tickets">
-        <div class="container px-4 cto--container">
-          <div class="flex items-center justify-between lots--container">
-            <div class="relative left--sect">
+        <div class="cto--container container px-4">
+          <div class="flex lots--container justify-between items-center">
+            <div class="left--sect relative">
               <div class="relative z-10">
                 <h3 class="sect--title">
                   WE HAVE LOTS OF TICKET CATEGORIES TO
@@ -135,10 +135,10 @@
         </div>
       </section>
       <section class="how-it-works">
-        <div class="container px-4 cto--container">
+        <div class="cto--container container px-4">
           <div class="how-container">
             <h3 class="sect-title">HOW IT WORKS</h3>
-            <p class="max-w-2xl mb-10 text-center">
+            <p class="max-w-2xl text-center mb-10">
               Lorem ipsum dolor sit amet consectetur. Purus hac aliquet feugiat
               ultrices aliquet cursus sed tempus. Tristique cum faucibus viverra
               diam ut sit.

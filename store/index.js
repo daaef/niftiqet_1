@@ -128,10 +128,10 @@ export const useStore = defineStore('main', {
       const data = await this.$nuxt.$graphql.default.request(query, variables)
       this.activeTokens = data.mb_views_nft_tokens
     },
-    async fetchNftTokensBySplit(metadataId) {
+    async fetchNftTokensBySplit(splitAccount) {
       const query = nftTokensBySplits
       const variables = {
-        metadataId,
+        splitAccount,
       }
       const data = await this.$nuxt.$graphql.default.request(query, variables)
 

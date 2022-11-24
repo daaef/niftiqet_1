@@ -22,7 +22,11 @@ export default {
   },
   async mounted() {
     await this.store.setupWallet()
-    await this.store.fetchNftTokensBySplit(`aef.testnet`)
+    await this.store.fetchNftTokensBySplit(
+      this.$nuxt.$config.network === 'testnet'
+        ? `aef.testnet`
+        : 'niftiqet.utinifty.near'
+    )
     this.userType =
       localStorage.getItem('userType') || sessionStorage.getItem('userType')
     if (!this.userType) {
