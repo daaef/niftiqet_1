@@ -37,7 +37,10 @@
     </div>
     <div class="container pt-10 footer-center text-base-content">
       <div class="flex flex-col">
-        <p>@Niftiqet 2022 All Right Reserved</p>
+        <p>
+          @Niftiqet 2022 All Right Reserved. Built with
+          <i class="cf cf-near mr-0.5"></i> <span class="font-bold">NEAR</span>
+        </p>
       </div>
     </div>
   </footer>
